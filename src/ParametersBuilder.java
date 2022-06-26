@@ -12,7 +12,7 @@ public class ParametersBuilder {
         final Mode modeName = switch (mode) {
             case "coding" -> Mode.CODING;
             case "decoding" -> Mode.DECODING;
-            default -> throw new IllegalArgumentException("Error: mode is not found");
+            default -> throw new IllegalArgumentException("Error: mode is not found\nAvailable modes: coding, decoding");
         };
         return new Parameters(pathWay, modeName);
     }

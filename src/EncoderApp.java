@@ -3,8 +3,8 @@ public class EncoderApp {
         try {
             Parameters parameters = ParametersBuilder.build(args);
             StringEncoder stringEncoder = new StringEncoder();
-            FileEncoder encoderFile = new FileEncoder(stringEncoder);
-            encoderFile.transformFile(parameters);
+            FileEncoder fileEncoder = new FileEncoder(stringEncoder);
+            fileEncoder.transformFile(parameters);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }

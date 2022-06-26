@@ -8,6 +8,16 @@ public class FileEncoder {
         this.stringEncoder = stringEncoder;
     }
 
+    public void transformFile(Parameters parameters) {
+        try {
+            doTransform(parameters);
+        } catch (IOException e) {
+            System.out.println("Error: file not found");
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     private String readFile(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String text = reader.readLine();
@@ -52,11 +62,5 @@ public class FileEncoder {
         }
     }
 
-    public void transformFile(Parameters parameters) {
-        try {
-            doTransform(parameters);
-        } catch (IOException e) {
-            System.out.println("Error: file not found");
-        }
-    }
+
 }
