@@ -2,10 +2,10 @@ import java.io.*;
 import java.nio.file.Path;
 
 public class FileEncoder {
-    StringEncoder stringEncoder;
+    CommonEncoder commonEncoder;
 
-    public FileEncoder(StringEncoder stringEncoder) {
-        this.stringEncoder = stringEncoder;
+    public FileEncoder(CommonEncoder commonEncoder) {
+        this.commonEncoder = commonEncoder;
     }
 
     public void transformFile(Parameters parameters) {
@@ -51,12 +51,12 @@ public class FileEncoder {
         switch (parameters.getMode()) {
             case CODING -> {
                 pathWayEncoder = createPathEncoder(parameters.getPathWay(), "coded");
-                textEncoder = stringEncoder.codingText(text);
+                textEncoder = commonEncoder.codingText(text);
                 writeFile(textEncoder, pathWayEncoder);
             }
             case DECODING -> {
                 pathWayEncoder = createPathEncoder(parameters.getPathWay(), "decoded");
-                textEncoder = stringEncoder.decodingText(text);
+                textEncoder = commonEncoder.decodingText(text);
                 writeFile(textEncoder, pathWayEncoder);
             }
         }

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 public class EncoderAppTest {
     StringEncoder stringEncoder = new StringEncoder();
     FileEncoder encoderFile = new FileEncoder(stringEncoder);
+    StringBuilderEncoder sbe = new StringBuilderEncoder();
 
     /*
         @Test
@@ -36,6 +37,22 @@ public class EncoderAppTest {
     }
 
     @Test
+    public void testCodingFile_3() {
+        String text = "aaabbbbcceeeeeeeeeebbbb";
+        String excepted = "a3b4c2e10b4";
+        String actual = sbe.codingText(text);
+        assertEquals(excepted, actual.toString());
+    }
+
+    @Test
+    public void testCodingFile_4() {
+        String text = "aaassearsssrmmj";
+        String excepted = "a3s2ears3rm2j";
+        String actual = sbe.codingText(text);
+        assertEquals(excepted, actual.toString());
+    }
+
+    @Test
     public void testDecodingFile_1() {
         String text = "a3b4c2e10b4";
         String excepted = "aaabbbbcceeeeeeeeeebbbb";
@@ -48,6 +65,22 @@ public class EncoderAppTest {
         String text = "a3s2ears3rm2j";
         String excepted = "aaassearsssrmmj";
         String actual = stringEncoder.decodingText(text);
+        assertEquals(excepted, actual);
+    }
+
+    @Test
+    public void testDecodingFile_3() {
+        String text = "a3b4c2e10b4";
+        String excepted = "aaabbbbcceeeeeeeeeebbbb";
+        String actual = sbe.decodingText(text);
+        assertEquals(excepted, actual);
+    }
+
+    @Test
+    public void testDecodingFile_4() {
+        String text = "a3s2ears3rm2j";
+        String excepted = "aaassearsssrmmj";
+        String actual = sbe.decodingText(text);
         assertEquals(excepted, actual);
     }
 
@@ -67,7 +100,7 @@ public class EncoderAppTest {
             String actual = encoderFile.createPathEncoder(pathWay, "decoded");
             assertEquals(excepted, actual);
         }
-    */
+
     @Test
     public void testBuild_1() {
         String[] inputArgs = {"input1.txt", "coding"};
@@ -85,7 +118,8 @@ public class EncoderAppTest {
         assertEquals(excepted.getPathWay(), actual.getPathWay());
         assertEquals(excepted.getMode(), actual.getMode());
     }
-
+     */
+/*
     @Test
     public void testBuild_3() {
         String[] inputArgs = {"input1.txt", "code"};
@@ -94,4 +128,5 @@ public class EncoderAppTest {
         assertEquals(excepted.getPathWay(), actual.getPathWay());
         assertEquals(excepted.getMode(), actual.getMode());
     }
+    */
 }
