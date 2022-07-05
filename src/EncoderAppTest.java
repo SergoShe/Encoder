@@ -1,11 +1,15 @@
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
 public class EncoderAppTest {
     StringEncoder stringEncoder = new StringEncoder();
     FileEncoder encoderFile = new FileEncoder(stringEncoder);
-    StringBuilderEncoder sbe = new StringBuilderEncoder();
+    StringBuilderEncoder stringBuilderEncoder = new StringBuilderEncoder();
 
     /*
         @Test
@@ -16,9 +20,9 @@ public class EncoderAppTest {
             assertEquals(expected, actual);
         }
     */
-    @Test
-    public void testWriteFile() {
-    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testCodingFile_1() {
@@ -40,16 +44,16 @@ public class EncoderAppTest {
     public void testCodingFile_3() {
         String text = "aaabbbbcceeeeeeeeeebbbb";
         String excepted = "a3b4c2e10b4";
-        String actual = sbe.codingText(text);
-        assertEquals(excepted, actual.toString());
+        String actual = stringBuilderEncoder.codingText(text);
+        assertEquals(excepted, actual);
     }
 
     @Test
     public void testCodingFile_4() {
         String text = "aaassearsssrmmj";
         String excepted = "a3s2ears3rm2j";
-        String actual = sbe.codingText(text);
-        assertEquals(excepted, actual.toString());
+        String actual = stringBuilderEncoder.codingText(text);
+        assertEquals(excepted, actual);
     }
 
     @Test
@@ -72,7 +76,7 @@ public class EncoderAppTest {
     public void testDecodingFile_3() {
         String text = "a3b4c2e10b4";
         String excepted = "aaabbbbcceeeeeeeeeebbbb";
-        String actual = sbe.decodingText(text);
+        String actual = stringBuilderEncoder.decodingText(text);
         assertEquals(excepted, actual);
     }
 
@@ -80,8 +84,51 @@ public class EncoderAppTest {
     public void testDecodingFile_4() {
         String text = "a3s2ears3rm2j";
         String excepted = "aaassearsssrmmj";
-        String actual = sbe.decodingText(text);
+        String actual = stringBuilderEncoder.decodingText(text);
         assertEquals(excepted, actual);
+    }
+
+    @Test
+    public void testBuild_1() {
+        String[] inputArgs = {"input1.txt", "coding", "StrinG"};
+        Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.CODING, Type.STRING);
+        Parameters actual = ParametersBuilder.build(inputArgs);
+        assertEquals(excepted.getPathWay(), actual.getPathWay());
+        assertEquals(excepted.getMode(), actual.getMode());
+        assertEquals(excepted.getType(), actual.getType());
+    }
+
+    @Test
+    public void testBuild_2() {
+        String[] inputArgs = {"input1.txt", "decoding", "StringBuilder"};
+        Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.DECODING, Type.STRINGBUILDER);
+        Parameters actual = ParametersBuilder.build(inputArgs);
+        assertEquals(excepted.getPathWay(), actual.getPathWay());
+        assertEquals(excepted.getMode(), actual.getMode());
+    }
+
+    @Test
+    public void testBuild_3() {
+        String[] inputArgs = {"input1.txt", "StringBuilder"};
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Error: parameter(s) not entry\nRequired parameters: pathWay, mode, type");
+        ParametersBuilder.build(inputArgs);
+    }
+
+    @Test
+    public void testBuild_4() {
+        String[] inputArgs = {"input1.txt", "decode", "StringBuilder"};
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Error: mode is not found\nAvailable modes: coding, decoding");
+        ParametersBuilder.build(inputArgs);
+    }
+
+    @Test
+    public void testBuild_5() {
+        String[] inputArgs = {"input1.txt", "coding", "StrBld"};
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Error: type is not found\nAvailavle types: String, StringBuilder");
+        ParametersBuilder.build(inputArgs);
     }
 
     /*
@@ -100,33 +147,5 @@ public class EncoderAppTest {
             String actual = encoderFile.createPathEncoder(pathWay, "decoded");
             assertEquals(excepted, actual);
         }
-
-    @Test
-    public void testBuild_1() {
-        String[] inputArgs = {"input1.txt", "coding"};
-        Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.CODING);
-        Parameters actual = ParametersBuilder.build(inputArgs);
-        assertEquals(excepted.getPathWay(), actual.getPathWay());
-        assertEquals(excepted.getMode(), actual.getMode());
-    }
-
-    @Test
-    public void testBuild_2() {
-        String[] inputArgs = {"input1.txt", "decoding"};
-        Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.DECODING);
-        Parameters actual = ParametersBuilder.build(inputArgs);
-        assertEquals(excepted.getPathWay(), actual.getPathWay());
-        assertEquals(excepted.getMode(), actual.getMode());
-    }
-     */
-/*
-    @Test
-    public void testBuild_3() {
-        String[] inputArgs = {"input1.txt", "code"};
-        Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", null);
-        Parameters actual = ParametersBuilder.build(inputArgs);
-        assertEquals(excepted.getPathWay(), actual.getPathWay());
-        assertEquals(excepted.getMode(), actual.getMode());
-    }
-    */
+*/
 }
