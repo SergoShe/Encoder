@@ -1,16 +1,16 @@
 public class StringBuilderEncoder extends CommonEncoder {
 
     public String codingText(String text) {
-        StringBuilder codingText = new StringBuilder();
+        StringBuilder codingTextBuilder = new StringBuilder();
         char tmp = text.charAt(0);
         int count = 1;
         for (int i = 1; i < text.length(); i++) {
             char symbol = text.charAt(i);
             if (symbol != tmp) {
                 if (count == 1) {
-                    codingText.append(tmp);
+                    codingTextBuilder.append(tmp);
                 } else {
-                    codingText.append(tmp).append(count);
+                    codingTextBuilder.append(tmp).append(count);
                 }
                 count = 1;
                 tmp = symbol;
@@ -19,15 +19,15 @@ public class StringBuilderEncoder extends CommonEncoder {
             }
         }
         if (count == 1) {
-            codingText.append(tmp);
+            codingTextBuilder.append(tmp);
         } else {
-            codingText.append(tmp).append(count);
+            codingTextBuilder.append(tmp).append(count);
         }
-        return codingText.toString();
+        return codingTextBuilder.toString();
     }
 
     public String decodingText(String text) {
-        StringBuilder decodedText = new StringBuilder();
+        StringBuilder decodedTextBuilder = new StringBuilder();
         char tmp = text.charAt(0);
         int count = 0;
         for (int i = 1; i < text.length(); i++) {
@@ -36,19 +36,19 @@ public class StringBuilderEncoder extends CommonEncoder {
                 int number = Integer.parseInt(String.valueOf(symbol));
                 count = count * 10 + number;
             } else if (count == 0) {
-                decodedText.append(tmp);
+                decodedTextBuilder.append(tmp);
                 tmp = symbol;
             } else {
-                decodedText.append(String.valueOf(tmp).repeat(count));
+                decodedTextBuilder.append(String.valueOf(tmp).repeat(count));
                 tmp = symbol;
                 count = 0;
             }
         }
         if (count == 0) {
-            decodedText.append(tmp);
+            decodedTextBuilder.append(tmp);
         } else {
-            decodedText.append(String.valueOf(tmp).repeat(count));
+            decodedTextBuilder.append(String.valueOf(tmp).repeat(count));
         }
-        return decodedText.toString();
+        return decodedTextBuilder.toString();
     }
 }
