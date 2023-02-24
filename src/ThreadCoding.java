@@ -1,4 +1,4 @@
-public class ThreadCoding implements Runnable{
+public class ThreadCoding implements Runnable {
     Resource resource;
     CommonEncoder encoder;
 
@@ -8,13 +8,12 @@ public class ThreadCoding implements Runnable{
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         String outputText = encoder.codingText(resource.getInputText());
-        synchronized (this) {
-            if (resource.getOutputText().isEmpty()) {
-                resource.setOutputText(outputText);
-                System.out.println("First finish is " + Thread.currentThread().getName());
-            }
+        if (resource.getOutputText().isEmpty()) {
+            resource.setOutputText(outputText);
+            System.out.println("First finish is " + Thread.currentThread().getName());
         }
+
     }
 }
