@@ -1,7 +1,14 @@
 public class StringBuilderEncoder extends CommonEncoder {
 
+    CounterProgress countProgress;
+
+    public StringBuilderEncoder(CounterProgress countProgress) {
+        this.countProgress = countProgress;
+    }
+
     public String codingText(String text) {
         StringBuilder codingTextBuilder = new StringBuilder();
+        countProgress.length = text.length();
         char tmp = text.charAt(0);
         int count = 1;
         for (int i = 1; i < text.length(); i++) {
@@ -17,12 +24,14 @@ public class StringBuilderEncoder extends CommonEncoder {
             } else {
                 count++;
             }
+            countProgress.value++;
         }
         if (count == 1) {
             codingTextBuilder.append(tmp);
         } else {
             codingTextBuilder.append(tmp).append(count);
         }
+        countProgress.value++;
         return codingTextBuilder.toString();
     }
 

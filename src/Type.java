@@ -1,4 +1,5 @@
 enum Type {
     STRING,
-    STRINGBUILDER
+    STRINGBUILDER,
+    COMPARABLE
 }

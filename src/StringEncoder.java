@@ -1,6 +1,13 @@
 public class StringEncoder extends CommonEncoder {
 
+    CounterProgress countProgress;
+
+    public StringEncoder(CounterProgress countProgress) {
+        this.countProgress = countProgress;
+    }
+
     public String codingText(String text) {
+        countProgress.length = text.length();
         String codingText = "";
         char tmp = text.charAt(0);
         int count = 1;
@@ -17,12 +24,14 @@ public class StringEncoder extends CommonEncoder {
             } else {
                 count++;
             }
+            countProgress.value++;
         }
         if (count == 1) {
             codingText += tmp;
         } else {
             codingText += tmp + String.valueOf(count);
         }
+        countProgress.value++;
         return codingText;
     }
 

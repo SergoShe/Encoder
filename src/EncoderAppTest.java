@@ -2,14 +2,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.IOException;
-
 import static org.junit.Assert.*;
 
 public class EncoderAppTest {
-    StringEncoder stringEncoder = new StringEncoder();
-    FileEncoder encoderFile = new FileEncoder(stringEncoder);
-    StringBuilderEncoder stringBuilderEncoder = new StringBuilderEncoder();
+    StringEncoder stringEncoder = new StringEncoder(new CounterProgress());
+    StringBuilderEncoder stringBuilderEncoder = new StringBuilderEncoder(new CounterProgress());
 
     /*
         @Test
@@ -131,21 +128,4 @@ public class EncoderAppTest {
         ParametersBuilder.build(inputArgs);
     }
 
-    /*
-        @Test
-        public void testCreateEncoderPath_1() {
-            String pathWay = "D:\\Java\\IdeaProjects\\Encoder\\input.txt";
-            String excepted = "D:\\Java\\IdeaProjects\\Encoder\\input_coded.txt";
-            String actual = encoderFile.createPathEncoder(pathWay, "coded");
-            assertEquals(excepted, actual);
-        }
-
-        @Test
-        public void testCreateEncoderPath_2() {
-            String pathWay = "D:\\Java\\IdeaProjects\\Encoder\\input.txt";
-            String excepted = "D:\\Java\\IdeaProjects\\Encoder\\input_decoded.txt";
-            String actual = encoderFile.createPathEncoder(pathWay, "decoded");
-            assertEquals(excepted, actual);
-        }
-*/
 }
