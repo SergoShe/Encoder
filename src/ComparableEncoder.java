@@ -12,10 +12,8 @@ public class ComparableEncoder extends CommonEncoder {
         threadStringBuilderEncoder.start();
         try {
             while (threadStringBuilderEncoder.isAlive() && threadStringEncoder.isAlive()) {
-                System.out.println("String: " + "*".repeat((int) countString.getPercent() / 10) + " " +  String.format("%.2f",countString.getPercent()) + "%");
-                if (threadStringBuilderEncoder.isAlive()) {
-                    System.out.println("StringBuilder: " + "*".repeat((int) countStringBuilder.getPercent() / 10) + " " +  String.format("%.2f",countStringBuilder.getPercent()) + "%");
-                }
+                System.out.println("String: " + "*".repeat((int) countString.getPercent() / 10) + " " + String.format("%.2f", countString.getPercent()) + "%");
+                System.out.println("StringBuilder: " + "*".repeat((int) countStringBuilder.getPercent() / 10) + " " + String.format("%.2f", countStringBuilder.getPercent()) + "%");
             }
             threadStringEncoder.join();
             threadStringBuilderEncoder.join();
