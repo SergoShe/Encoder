@@ -1,13 +1,13 @@
 public class StringEncoder extends CommonEncoder {
 
-    CounterProgress countProgress;
+    ProgressCounter countProgress;
 
-    public StringEncoder(CounterProgress countProgress) {
+    public StringEncoder(ProgressCounter countProgress) {
         this.countProgress = countProgress;
     }
 
     public String codingText(String text) {
-        countProgress.length = text.length();
+        countProgress.setLength(text.length());
         String codingText = "";
         char tmp = text.charAt(0);
         int count = 1;
@@ -24,18 +24,19 @@ public class StringEncoder extends CommonEncoder {
             } else {
                 count++;
             }
-            countProgress.value++;
+            countProgress.increaseValue();
         }
         if (count == 1) {
             codingText += tmp;
         } else {
             codingText += tmp + String.valueOf(count);
         }
-        countProgress.value++;
+        countProgress.increaseValue();
         return codingText;
     }
 
     public String decodingText(String text) {
+        countProgress.setLength(text.length());
         String decodedText = "";
         char tmp = text.charAt(0);
         int count = 0;
@@ -54,6 +55,7 @@ public class StringEncoder extends CommonEncoder {
                 tmp = symbol;
                 count = 0;
             }
+            countProgress.increaseValue();
         }
         if (count == 0) {
             decodedText += tmp;
@@ -62,6 +64,7 @@ public class StringEncoder extends CommonEncoder {
                 decodedText += tmp;
             }
         }
+        countProgress.increaseValue();
         return decodedText;
     }
 }

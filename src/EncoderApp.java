@@ -4,8 +4,8 @@ public class EncoderApp {
             Parameters parameters = ParametersBuilder.build(args);
             CommonEncoder commonEncoder = null;
             switch (parameters.getType()) {
-                case STRING -> commonEncoder = new StringEncoder(new CounterProgress());
-                case STRINGBUILDER -> commonEncoder = new StringBuilderEncoder(new CounterProgress());
+                case STRING -> commonEncoder = new StringEncoder(new ProgressCounter());
+                case STRINGBUILDER -> commonEncoder = new StringBuilderEncoder(new ProgressCounter());
                 case COMPARABLE -> commonEncoder = new ComparableEncoder();
             }
             FileEncoder fileEncoder = new FileEncoder(commonEncoder);

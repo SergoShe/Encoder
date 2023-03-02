@@ -1,16 +1,16 @@
-public class ThreadCoding implements Runnable {
+public class ThreadDecoding implements Runnable {
     private final Resource resource;
     private final CommonEncoder encoder;
     public boolean isFinished;
 
-    public ThreadCoding(Resource resource, CommonEncoder encoder) {
+    public ThreadDecoding(Resource resource, CommonEncoder encoder) {
         this.resource = resource;
         this.encoder = encoder;
     }
 
     @Override
     public synchronized void run() {
-        String outputText = encoder.codingText(resource.getInputText());
+        String outputText = encoder.decodingText(resource.getInputText());
         if (resource.getOutputText().isEmpty()) {
             resource.setOutputText(outputText);
             isFinished = true;

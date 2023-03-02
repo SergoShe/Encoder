@@ -5,8 +5,8 @@ import org.junit.rules.ExpectedException;
 import static org.junit.Assert.*;
 
 public class EncoderAppTest {
-    StringEncoder stringEncoder = new StringEncoder(new CounterProgress());
-    StringBuilderEncoder stringBuilderEncoder = new StringBuilderEncoder(new CounterProgress());
+    StringEncoder stringEncoder = new StringEncoder(new ProgressCounter());
+    StringBuilderEncoder stringBuilderEncoder = new StringBuilderEncoder(new ProgressCounter());
 
     /*
         @Test
