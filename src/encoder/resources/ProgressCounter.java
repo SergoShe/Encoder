@@ -1,3 +1,5 @@
+package encoder.resources;
+
 public class ProgressCounter {
     private double value;
     private double length;

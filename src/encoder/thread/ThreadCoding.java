@@ -1,3 +1,8 @@
+package encoder.thread;
+
+import encoder.CommonEncoder;
+import encoder.resources.Resource;
+
 public class ThreadCoding implements Runnable {
     private final Resource resource;
     private final CommonEncoder encoder;

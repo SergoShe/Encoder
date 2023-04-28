@@ -1,8 +1,10 @@
+package encoder.resources;
+
 public class Resource {
     private final String inputText;
     private String outputText = "";
 
-    Resource(String inputText) {
+    public Resource(String inputText) {
         this.inputText = inputText;
     }
 

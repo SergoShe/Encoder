@@ -1,3 +1,7 @@
+package encoder;
+
+import parameters.Parameters;
+
 import java.io.*;
 import java.nio.file.Path;
 

@@ -1,3 +1,8 @@
+import encoder.*;
+import encoder.resources.ProgressCounter;
+import parameters.Parameters;
+import parameters.ParametersBuilder;
+
 public class EncoderApp {
     public static void main(String[] args) {
         try {

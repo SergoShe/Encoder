@@ -1,6 +1,16 @@
+package testEncoder;
+
+import encoder.StringBuilderEncoder;
+import encoder.StringEncoder;
+import encoder.resources.ProgressCounter;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import parameters.Mode;
+import parameters.Parameters;
+import parameters.ParametersBuilder;
+import parameters.Type;
 
 import static org.junit.Assert.*;
 
@@ -90,9 +100,9 @@ public class EncoderAppTest {
         String[] inputArgs = {"input1.txt", "coding", "StrinG"};
         Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.CODING, Type.STRING);
         Parameters actual = ParametersBuilder.build(inputArgs);
-        assertEquals(excepted.getPathWay(), actual.getPathWay());
-        assertEquals(excepted.getMode(), actual.getMode());
-        assertEquals(excepted.getType(), actual.getType());
+        Assert.assertEquals(excepted.getPathWay(), actual.getPathWay());
+        Assert.assertEquals(excepted.getMode(), actual.getMode());
+        Assert.assertEquals(excepted.getType(), actual.getType());
     }
 
     @Test
@@ -100,8 +110,8 @@ public class EncoderAppTest {
         String[] inputArgs = {"input1.txt", "decoding", "StringBuilder"};
         Parameters excepted = new Parameters("D:\\Java\\IdeaProjects\\Encoder\\input1.txt", Mode.DECODING, Type.STRINGBUILDER);
         Parameters actual = ParametersBuilder.build(inputArgs);
-        assertEquals(excepted.getPathWay(), actual.getPathWay());
-        assertEquals(excepted.getMode(), actual.getMode());
+        Assert.assertEquals(excepted.getPathWay(), actual.getPathWay());
+        Assert.assertEquals(excepted.getMode(), actual.getMode());
     }
 
     @Test

@@ -1,23 +1,27 @@
-public class StringEncoder extends CommonEncoder {
+package encoder;
+
+import encoder.resources.ProgressCounter;
+
+public class StringBuilderEncoder extends CommonEncoder {
 
     ProgressCounter countProgress;
 
-    public StringEncoder(ProgressCounter countProgress) {
+    public StringBuilderEncoder(ProgressCounter countProgress) {
         this.countProgress = countProgress;
     }
 
     public String codingText(String text) {
+        StringBuilder codingTextBuilder = new StringBuilder();
         countProgress.setLength(text.length());
-        String codingText = "";
         char tmp = text.charAt(0);
         int count = 1;
         for (int i = 1; i < text.length(); i++) {
             char symbol = text.charAt(i);
             if (symbol != tmp) {
                 if (count == 1) {
-                    codingText += tmp;
+                    codingTextBuilder.append(tmp);
                 } else {
-                    codingText += tmp + String.valueOf(count);
+                    codingTextBuilder.append(tmp).append(count);
                 }
                 count = 1;
                 tmp = symbol;
@@ -27,17 +31,17 @@ public class StringEncoder extends CommonEncoder {
             countProgress.increaseValue();
         }
         if (count == 1) {
-            codingText += tmp;
+            codingTextBuilder.append(tmp);
         } else {
-            codingText += tmp + String.valueOf(count);
+            codingTextBuilder.append(tmp).append(count);
         }
         countProgress.increaseValue();
-        return codingText;
+        return codingTextBuilder.toString();
     }
 
     public String decodingText(String text) {
+        StringBuilder decodedTextBuilder = new StringBuilder();
         countProgress.setLength(text.length());
-        String decodedText = "";
         char tmp = text.charAt(0);
         int count = 0;
         for (int i = 1; i < text.length(); i++) {
@@ -46,25 +50,21 @@ public class StringEncoder extends CommonEncoder {
                 int number = Integer.parseInt(String.valueOf(symbol));
                 count = count * 10 + number;
             } else if (count == 0) {
-                decodedText += tmp;
+                decodedTextBuilder.append(tmp);
                 tmp = symbol;
             } else {
-                for (int j = 0; j < count; j++) {
-                    decodedText += tmp;
-                }
+                decodedTextBuilder.append(String.valueOf(tmp).repeat(count));
                 tmp = symbol;
                 count = 0;
             }
             countProgress.increaseValue();
         }
         if (count == 0) {
-            decodedText += tmp;
+            decodedTextBuilder.append(tmp);
         } else {
-            for (int j = 0; j < count; j++) {
-                decodedText += tmp;
-            }
+            decodedTextBuilder.append(String.valueOf(tmp).repeat(count));
         }
         countProgress.increaseValue();
-        return decodedText;
+        return decodedTextBuilder.toString();
     }
 }

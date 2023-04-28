@@ -1,3 +1,11 @@
+package encoder;
+
+
+import encoder.resources.ProgressCounter;
+import encoder.resources.Resource;
+import encoder.thread.ThreadCoding;
+import encoder.thread.ThreadDecoding;
+
 public class ComparableEncoder extends CommonEncoder {
 
     public String codingText(String text) {
@@ -18,13 +26,13 @@ public class ComparableEncoder extends CommonEncoder {
                 if (runnableStringEncoder.isFinished || runnableStringBuilderEncoder.isFinished) {
                     isWork = false;
                     if (runnableStringEncoder.isFinished && runnableStringBuilderEncoder.isFinished) {
-                        System.out.println("StringEncoder and StringBuilderEncoder threads are finished");
+                        System.out.println("encoder.StringEncoder and encoder.StringBuilderEncoder threads are finished");
                     } else if (!runnableStringBuilderEncoder.isFinished) {
                         threadStringBuilderEncoder.interrupt();
-                        System.out.println("First finish is StringEncoder thread");
+                        System.out.println("First finish is encoder.StringEncoder thread");
                     } else {
                         threadStringEncoder.interrupt();
-                        System.out.println("First finish is StringBuilderEncoder thread");
+                        System.out.println("First finish is encoder.StringBuilderEncoder thread");
                     }
                 } else {
                     Thread.sleep(1);
@@ -54,13 +62,13 @@ public class ComparableEncoder extends CommonEncoder {
                 if (runnableStringEncoder.isFinished || runnableStringBuilderEncoder.isFinished) {
                     isWork = false;
                     if (runnableStringEncoder.isFinished && runnableStringBuilderEncoder.isFinished) {
-                        System.out.println("StringEncoder and StringBuilderEncoder threads are finished");
+                        System.out.println("encoder.StringEncoder and encoder.StringBuilderEncoder threads are finished");
                     } else if (!runnableStringBuilderEncoder.isFinished) {
                         threadStringBuilderEncoder.interrupt();
-                        System.out.println("First finish is StringEncoder thread");
+                        System.out.println("First finish is encoder.StringEncoder thread");
                     } else {
                         threadStringEncoder.interrupt();
-                        System.out.println("First finish is StringBuilderEncoder thread");
+                        System.out.println("First finish is encoder.StringBuilderEncoder thread");
                     }
                 } else {
                     Thread.sleep(1);
