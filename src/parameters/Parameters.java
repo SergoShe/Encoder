@@ -1,3 +1,5 @@
+package parameters;
+
 public class Parameters {
     private final String pathWay;
     private final Mode mode;

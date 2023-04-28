@@ -1,3 +1,5 @@
+package parameters;
+
 import java.nio.file.Path;
 
 public class ParametersBuilder {
@@ -19,6 +21,7 @@ public class ParametersBuilder {
         final Type typeName = switch (type) {
             case "string" -> Type.STRING;
             case "stringbuilder" -> Type.STRINGBUILDER;
+            case "comparable" -> Type.COMPARABLE;
             default ->
                     throw new IllegalArgumentException("Error: type is not found\nAvailavle types: String, StringBuilder");
         };

@@ -1,3 +1,5 @@
+package encoder;
+
 public abstract class CommonEncoder {
     abstract public String codingText(String text);
 
